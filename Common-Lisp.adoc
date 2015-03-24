@@ -28,3 +28,21 @@ TODO: Code examples
 ;; With osicat
 (osicat:current-directory)
 ----
+
+=== Changing current working directory/+cd+
+
+[source,lisp,linenums]
+----
+;; Only in SBCL
+(sb-posix:cwd "/tmp")
+
+;; Require cl-cwd
+(cl-cwd:cwd "/tmp")
+
+;; Require cl-cwd, when you'd like to change it temporarily
+(cl-cwd:with-cwd "/tmp/"
+  (format t "~A" (directory (make-pathname :directory '(:relative ".")
+                                           :name :wild
+                                           :type :wild))))
+----
+
