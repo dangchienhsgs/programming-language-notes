@@ -13,3 +13,12 @@ TODO: Code examples
 * Emacs with Slime
 * Quicklisp as package manager
 
+== Frequently encountered tasks
+
+=== Getting current working directory
+
+* Avoid +*default-pathname-defaults*+, it's implementation-dependent.
+* (SBCL) SBCL: +(sb-posix:getcwd)+.
+* Recommended:
+** Use ++cl-cwd++'s +cl-cwd:get-cwd+, or
+** ++osicat++'s +(osicat:current-directory)+.
