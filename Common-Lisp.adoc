@@ -22,10 +22,10 @@ TODO: Code examples
 
 [source,lisp,linenums]
 ----
-;; With cl-cwd
+;; Require cl-cwd
 (cl-cwd:get-cwd)
 
-;; With osicat
+;; Require osicat
 (osicat:current-directory)
 ----
 
