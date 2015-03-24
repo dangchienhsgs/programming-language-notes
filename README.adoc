@@ -1,4 +1,6 @@
-Collection of notes on programming language that I have learnt and used.
+= Programming Language Notes
+
+Personal collection of notes on programming language.
 
 [quote, Linus Torvalds]
 ____
