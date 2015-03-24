@@ -1,0 +1,15 @@
+= Quick notes on Common Lisp
+
+
+TODO: Code examples
+
+* http://rosettacode.org
+* http://www.cliki.net/current%20recommended%20libraries
+
+'''
+
+== Recommended setup (objective)
+
+* Emacs with Slime
+* Quicklisp as package manager
+
