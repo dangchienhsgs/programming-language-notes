@@ -12,14 +12,16 @@ I try to keep all notes short, simple, and concise, with clean code examples
 They are not meant to replace a carefully written guide or reference.
 
 Should you discover any mistakes, please please please
-[drop me an issue](https://github.com/cmpitg/programming-language-notes/issues).
+https://github.com/cmpitg/programming-language-notes/issues[drop me an issue].
 Your help is much appreciated.
 
 List of notes:
 
-* [Common Lisp](./Common-Lisp.adoc)
+* link:Common-Lisp.adoc[Common Lisp]
 
-## License ##
+== License
 
 All materials in this repository are published under the terms of the FreeBSD
-license.  Please see [`COPYING`](./COPYING) for further information.
+license.  Please see link:COPYING[+COPYING+] for further information.
+
+Copyright (c) 2015, Duong H. Nguyen <cmpitg@gmail.com>
