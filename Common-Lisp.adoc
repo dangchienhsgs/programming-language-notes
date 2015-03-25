@@ -53,3 +53,41 @@ TODO: Code examples
 respectively.  In modern system and practice, two kinds of pathnames could be
 used interchangably.
 
+=== Reading/slurping file
+
+* Simplest way to read a line from a file:
++
+[source,lisp,linenums]
+----
+(with-open-file (in #P"/tmp/tmp.txt")
+  (format t "~A~%" (read-line in)))
+----
+
+* Useful functions: +read-line+, +read-char+, +peek-char+, +file-position+
+  (jumping to a position).
+
+* To read whole file:
+
+** The best way is probably to use +read-utf-8-string+ from +trivial-utf-8+
+   library:
++
+[source,lisp,linenums]
+----
+(defun slurp (filespec)
+  "Reads and returns the whole file as string."
+  (with-open-file (in filespec :element-type '(unsigned-byte 8))
+    (trivial-utf-8:read-utf-8-string in :stop-at-eof t)))
+----
+
+** Or if you don't care about encoding thing and just want to read ASCII, one
+   way is to use +read-sequence+ with +file-length+ to read the content of the
+   file into a string:
++
+[source,lisp,linenums]
+----
+(with-open-file (in #P"/tmp/tmp.txt")
+  (let ((seq (make-string (file-length in))))
+    (read-sequence seq in)
+    seq))
+----
+
