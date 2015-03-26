@@ -78,6 +78,10 @@ used interchangably.
 
 === Reading/slurping file
 
+Avoid using +open+ and +close+ as 1) it's error-prone, and 2) the file might
+not properly closed if you don't properly handle it.  Instead, use
++with-open-file+.
+
 * Simplest way to read a line from a file:
 +
 [source,lisp,linenums]
