@@ -41,7 +41,7 @@ TODO: Code examples
 
 === Getting current working directory
 
-* Avoid `\*default-pathname-defaults*`, it's implementation-dependent.
+* Avoid `*default-pathname-defaults*`, it's implementation-dependent.
 * (SBCL) SBCL: `(sb-posix:getcwd)`.
 
 [source,lisp,linenums]
@@ -73,7 +73,7 @@ TODO: Code examples
 
 === Getting current file
 
-`\*load-truename*` or `\*load-pathname*`, returning truename and pathname,
+`*load-truename*` or `*load-pathname*`, returning truename and pathname,
 respectively.  In modern system and practice, two kinds of pathnames could be
 used interchangably.
 
@@ -128,6 +128,7 @@ not properly closed if you don't properly handle it.  Instead, use
 (merge-pathnames #p"lib/misc" #p"home/batman")   ;; ⇨ #P"home/lib/misc"
 (merge-pathnames #p"lib/misc" #p"home/batman/")  ;; ⇨ #P"home/batman/lib/misc"
 ----
+
 === Getting path to a system loaded with ASDF
 
 [source,lisp,linenums]
