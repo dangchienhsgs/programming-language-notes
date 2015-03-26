@@ -134,4 +134,42 @@ not properly closed if you don't properly handle it.  Instead, use
 ----
 (asdf:system-source-directory :optima) ;; ⇨ #P"/home/batman/quicklisp/dists/quicklisp/software/optima-20150302-git/"
 ----
+
+=== Writing to file
+
+* Write when file doesn't exist.  The following code will signal an error if
+  `/tmp/tmp.txt` exists:
++
+[source,lisp,linenums]
+----
+(with-open-file (out #P"/tmp/tmp.txt" :direction :output)
+  (format t "Hello World~%"))
+----
+
+* Overwrite if file exists.  Note that `:if-exists` is `:supersude`, **not** `:overwrite`:
++
+[source,lisp,linenums]
+----
+(with-open-file (out #P"/tmp/tmp.txt"
+                     :direction :output
+                     :if-exists :supersede)
+  (format out "Xin chào thế giới~%"))
+----
+* Overwrite, starting from the beginning of the file.  Note that Note that `:if-exists` is `:overwrite`:
++
+[source,lisp,linenums]
+----
+(with-open-file (out #P"/tmp/tmp.txt"
+                     :direction :output
+                     :if-exists :supersede)
+  (format out "Hello world!~%"))
+
+(with-open-file (out #P"/tmp/tmp.txt"
+                     :direction :output
+                     :if-exists :overwrite)
+  (format out "Bye  "))
+
+(with-open-file (in #P"/tmp/tmp.txt")
+  (read-line in))
+;;; ⇨ "Bye  world!
 ----
