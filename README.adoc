@@ -17,7 +17,8 @@ Your help is much appreciated.
 
 List of notes:
 
-* link:Common-Lisp.adoc[Common Lisp]
+* link:Common-Lisp.adoc[Common Lisp] -
+  http://reference-error.org/guides/Common-Lisp.html[HTML version].
 
 == License
 
