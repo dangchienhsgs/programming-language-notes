@@ -22,6 +22,6 @@ List of notes:
 == License
 
 All materials in this repository are published under the terms of the FreeBSD
-license.  Please see link:COPYING[+COPYING+] for further information.
+license.  Please see link:COPYING[`COPYING`] for further information.
 
 Copyright (c) 2015, Duong H. Nguyen <cmpitg@gmail.com>

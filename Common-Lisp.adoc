@@ -5,7 +5,6 @@
 :toclevels: 4
 :numbered:
 :icons: font
-:pygments-css: class
 :imagesdirs: ../assets/images
 
 TODO: Code examples
@@ -18,12 +17,12 @@ TODO: Code examples
 
 * Notes about discard-next-char
 
-* Notes about +(read input-stream t nil t)+ idiom:
-** +(with-input-from-string (is " ") (read is nil 'the-end))+ returns +THE-END+
-** +(with-input-from-string (is " ") (read is t <anything>))+ throws error.
-** +recursive-p+ is +t+ means we expect this +read+ call is inside a reader macro
+* Notes about `(read input-stream t nil t)` idiom:
+** `(with-input-from-string (is " ") (read is nil 'the-end))` returns `THE-END`
+** `(with-input-from-string (is " ") (read is t <anything>))` throws error.
+** `recursive-p` is `t` means we expect this `read` call is inside a reader macro
 
-* Notes about +read-delimited-list+ and reader macro: http://www.lispworks.com/documentation/HyperSpec/Body/f_rd_del.htm
+* Notes about `read-delimited-list` and reader macro: http://www.lispworks.com/documentation/HyperSpec/Body/f_rd_del.htm
 
 * Notes about writing reader macro in JSON: https://gist.github.com/chaitanyagupta/9324402
 
@@ -40,8 +39,8 @@ TODO: Code examples
 
 === Getting current working directory
 
-* Avoid +\*default-pathname-defaults*+, it's implementation-dependent.
-* (SBCL) SBCL: +(sb-posix:getcwd)+.
+* Avoid `\*default-pathname-defaults*`, it's implementation-dependent.
+* (SBCL) SBCL: `(sb-posix:getcwd)`.
 
 [source,lisp,linenums]
 ----
@@ -52,7 +51,7 @@ TODO: Code examples
 (osicat:current-directory)
 ----
 
-=== Changing current working directory/+cd+
+=== Changing current working directory/`cd`
 
 [source,lisp,linenums]
 ----
@@ -72,15 +71,15 @@ TODO: Code examples
 
 === Getting current file
 
-+\*load-truename*+ or +\*load-pathname*+, returning truename and pathname,
+`\*load-truename*` or `\*load-pathname*`, returning truename and pathname,
 respectively.  In modern system and practice, two kinds of pathnames could be
 used interchangably.
 
 === Reading/slurping file
 
-Avoid using +open+ and +close+ as 1) it's error-prone, and 2) the file might
+Avoid using `open` and `close` as 1) it's error-prone, and 2) the file might
 not properly closed if you don't properly handle it.  Instead, use
-+with-open-file+.
+`with-open-file`.
 
 * Simplest way to read a line from a file:
 +
@@ -90,12 +89,12 @@ not properly closed if you don't properly handle it.  Instead, use
   (format t "~A~%" (read-line in)))
 ----
 
-* Useful functions: +read-line+, +read-char+, +peek-char+, +file-position+
+* Useful functions: `read-line`, `read-char`, `peek-char`, `file-position`
   (jumping to a position).
 
 * To read whole file:
 
-** The best way is probably to use +read-utf-8-string+ from +trivial-utf-8+
+** The best way is probably to use `read-utf-8-string` from `trivial-utf-8`
    library:
 +
 [source,lisp,linenums]
@@ -107,7 +106,7 @@ not properly closed if you don't properly handle it.  Instead, use
 ----
 
 ** Or if you don't care about encoding thing and just want to read ASCII, one
-   way is to use +read-sequence+ with +file-length+ to read the content of the
+   way is to use `read-sequence` with `file-length` to read the content of the
    file into a string:
 +
 [source,lisp,linenums]
