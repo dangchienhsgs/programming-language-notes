@@ -4,6 +4,8 @@
 :toc: left
 :toclevels: 4
 :numbered:
+:source-highlighter: pygments
+:pygments-css: class
 :icons: font
 :imagesdirs: ../assets/images
 
