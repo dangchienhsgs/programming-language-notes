@@ -100,4 +100,10 @@ used interchangably.
 (merge-pathnames #p"lib/misc" #p"home/batman")   ;; ⇨ #P"home/lib/misc"
 (merge-pathnames #p"lib/misc" #p"home/batman/")  ;; ⇨ #P"home/batman/lib/misc"
 ----
+=== Getting path to a system loaded with ASDF
+
+[source,lisp,linenums]
+----
+(asdf:system-source-directory :optima) ;; ⇨ #P"/home/batman/quicklisp/dists/quicklisp/software/optima-20150302-git/"
+----
 ----
