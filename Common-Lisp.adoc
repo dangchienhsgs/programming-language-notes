@@ -99,6 +99,15 @@ not properly closed if you don't properly handle it.  Instead, use
   (format t "~A~%" (read-line in)))
 ----
 
+* Reading binary:
++
+[source,lisp,linenums]
+----
+(with-open-file (in #P"/tmp/tmp.txt" :element-type '(unsigned-byte 8))
+  (read-byte in))
+----
+
+
 * Useful functions: `read-line`, `read-char`, `peek-char`, `file-position`
   (jumping to a position).
 
