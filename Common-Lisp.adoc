@@ -9,7 +9,7 @@
 :icons: font
 :imagesdirs: ../assets/images
 
-TODO: Code examples
+IMPORTANT: Code examples
 
 * http://rosettacode.org
 
@@ -29,6 +29,14 @@ TODO: Code examples
 * Notes about writing reader macro in JSON: https://gist.github.com/chaitanyagupta/9324402
 
 * Notes about writing reader macros in practice with https://common-lisp.net/project/named-readtables/
+
+* Notes about readtable:
+** Custom vector literal
+** https://common-lisp.net/project/named-readtables/
+
+* Good utils:
+** https://github.com/vseloved/rutils
+** https://github.com/vseloved/rutils/blob/master/docs/ann-rutils.md
 
 '''
 
