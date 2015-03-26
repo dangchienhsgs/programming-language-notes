@@ -17,7 +17,7 @@ TODO: Code examples
 
 === Getting current working directory
 
-* Avoid +*default-pathname-defaults*+, it's implementation-dependent.
+* Avoid +\*default-pathname-defaults\*+, it's implementation-dependent.
 * (SBCL) SBCL: +(sb-posix:getcwd)+.
 
 [source,lisp,linenums]
@@ -49,7 +49,7 @@ TODO: Code examples
 
 === Getting current file
 
-+*load-truename*+ or +*load-pathname*+, returning truename and pathname,
++\*load-truename\*+ or +\*load-pathname\*+, returning truename and pathname,
 respectively.  In modern system and practice, two kinds of pathnames could be
 used interchangably.
 
