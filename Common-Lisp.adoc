@@ -1,10 +1,33 @@
 = Quick notes on Common Lisp
-
+:Author: Nguyễn Hà Dương (cmpitg)
+:Email: <cmpitg@gmail.com>
+:toc: left
+:toclevels: 4
+:numbered:
+:icons: font
+:pygments-css: class
+:imagesdirs: ../assets/images
 
 TODO: Code examples
 
 * http://rosettacode.org
+
 * http://www.cliki.net/current%20recommended%20libraries
+
+* Notes about peek-char
+
+* Notes about discard-next-char
+
+* Notes about +(read input-stream t nil t)+ idiom:
+** +(with-input-from-string (is " ") (read is nil 'the-end))+ returns +THE-END+
+** +(with-input-from-string (is " ") (read is t <anything>))+ throws error.
+** +recursive-p+ is +t+ means we expect this +read+ call is inside a reader macro
+
+* Notes about +read-delimited-list+ and reader macro: http://www.lispworks.com/documentation/HyperSpec/Body/f_rd_del.htm
+
+* Notes about writing reader macro in JSON: https://gist.github.com/chaitanyagupta/9324402
+
+* Notes about writing reader macros in practice with https://common-lisp.net/project/named-readtables/
 
 '''
 
