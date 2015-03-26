@@ -95,8 +95,9 @@ used interchangably.
 
 [source,lisp,linenums]
 ----
-(merge-pathnames #p"lib/misc" #p"/home/batman") ⇨ #P"/home/lib/misc"
-(merge-pathnames #p"lib/misc" #p"/home/batman/") ⇨ #P"/home/batman/lib/misc"
-(merge-pathnames #p"lib/misc" #p"home/batman") ⇨ #P"home/lib/misc"
-(merge-pathnames #p"lib/misc" #p"home/batman/") ⇨ #P"home/batman/lib/misc"
+(merge-pathnames #p"lib/misc" #p"/home/batman")  ;; ⇨ #P"/home/lib/misc"
+(merge-pathnames #p"lib/misc" #p"/home/batman/") ;; ⇨ #P"/home/batman/lib/misc"
+(merge-pathnames #p"lib/misc" #p"home/batman")   ;; ⇨ #P"home/lib/misc"
+(merge-pathnames #p"lib/misc" #p"home/batman/")  ;; ⇨ #P"home/batman/lib/misc"
+----
 ----
