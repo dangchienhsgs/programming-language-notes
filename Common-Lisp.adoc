@@ -191,3 +191,16 @@ not properly closed if you don't properly handle it.  Instead, use
   (read-line in))
 ;;; ⇨ "Bye  world!
 ----
+* Write binary:
++
+[source,lisp,linenums]
+----
+(with-open-file (out #P"/tmp/abc.txt"
+                     :direction :output
+                     :element-type '(unsigned-byte 8))
+  (write-byte 97 out)
+  (write-byte 98 out)
+  (write-byte 99 out))
+;;; Write out "abc"
+----
+
