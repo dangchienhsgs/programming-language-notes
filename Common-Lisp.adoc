@@ -198,3 +198,10 @@ not properly closed if you don't properly handle it.  Instead, use
 ;;; Write out "abc"
 ----
 
+== FAQs
+
+=== What is truename?
+
+Reference: http://www.lispworks.com/documentation/lw51/CLHS/Body/20_ac.htm
+
+Truename is a pathname with any file system-level translations such as resolving symbolic links performed.
