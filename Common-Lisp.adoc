@@ -30,6 +30,8 @@ IMPORTANT: Code examples
 
 * Notes about writing reader macros in practice with https://common-lisp.net/project/named-readtables/
 
+* Notes about extracting filename and extracting file extensions.
+
 * Notes about readtable:
 ** Custom vector literal
 ** https://common-lisp.net/project/named-readtables/
