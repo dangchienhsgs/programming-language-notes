@@ -202,6 +202,41 @@ not properly closed if you don't properly handle it.  Instead, use
 
 === What is truename?
 
-Reference: http://www.lispworks.com/documentation/lw51/CLHS/Body/20_ac.htm
+From
+http://www.lispworks.com/documentation/lw51/CLHS/Body/20_ac.htm[HyperSpec]:
+
+[quote]
+____
+Truename is a pathname with any file system-level translations such as
+resolving symbolic links performed.
+____
+
+=== Difference between physical and logical pathname?
+
+* From
+  http://www.lispworks.com/documentation/lw51/CLHS/Body/t_logica.htm[HyperSpec]:
++
+[quote]
+____
+(Logical pathname is) A pathname that uses a namestring syntax that is
+implementation-independent, and that has component values that are
+implementation-independent
+____
+
+* From http://www.gigamonkeys.com/book[Practical Common Lisp]
++
+[quote]
+____
+Logical pathnames allow Common Lisp programs to contain references to
+pathnames without naming specific files. Logical pathnames could then be
+mapped to specific locations in an actual file system when the program was
+installed by defining a "logical pathname translation" that translates logical
+pathnames matching certain wildcards to pathnames representing files in the
+file system, so-called physical pathnames.
+____
+
+In modern system, it's safe to ignore the difference between logical and
+physical pathnames.
+
 
 Truename is a pathname with any file system-level translations such as resolving symbolic links performed.
