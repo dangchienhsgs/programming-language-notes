@@ -198,6 +198,15 @@ not properly closed if you don't properly handle it.  Instead, use
 ;;; Write out "abc"
 ----
 
+=== Listing directory
+
+With `cl-pad` library:
+
+[source,lisp,linenums]
+----
+(cl-pad:list-directory #P"/tmp/")                      ;; => List
+(cl-pad:list-directory #P"/tmp/" :follow-symlinks t)   ;; => List
+----
 == FAQs
 
 === What is truename?
