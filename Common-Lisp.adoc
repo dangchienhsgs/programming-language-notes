@@ -207,6 +207,18 @@ With `cl-pad` library:
 (cl-pad:list-directory #P"/tmp/")                      ;; => List
 (cl-pad:list-directory #P"/tmp/" :follow-symlinks t)   ;; => List
 ----
+
+=== Checking if a file or directory exists
+
+Either `probe-file` or `cl-fad`'s `file-exists` would work.
+
+[source,lisp,linenums]
+----
+(probe-file #P"/home/batman")           ;; => #P"/home/batman/"
+(cl-fad:file-exists-p #P"/home/batman") ;; => #P"/home/batman/"
+(cl-fad:file-exists-p #P"/home/batma")  ;; => NIL
+----
+
 == FAQs
 
 === What is truename?
