@@ -40,11 +40,6 @@ IMPORTANT: Code examples
 
 '''
 
-== Recommended setup (objective)
-
-* Emacs with Slime
-* Quicklisp as package manager
-
 == Tips and tricks
 
 === Getting current working directory
