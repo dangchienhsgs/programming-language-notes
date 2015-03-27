@@ -82,8 +82,7 @@ IMPORTANT: Code examples
 === Getting current file
 
 `*load-truename*` or `*load-pathname*`, returning truename and pathname,
-respectively.  In modern system and practice, two kinds of pathnames could be
-used interchangably.
+respectively.
 
 === Reading/slurping file
 
