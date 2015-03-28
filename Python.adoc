@@ -9,6 +9,23 @@
 :icons: font
 :imagesdirs: ../assets/images
 
+== Tips and tricks
+
+=== `pip install` inside Python
+
+Reference: http://stackoverflow.com/questions/12332975/installing-python-module-within-code
+
+[source,python,linenums]
+----
+import pip
+
+
+def install(package):
+    pip.main(['install', package])
+
+install('tornado')
+----
+
 == FAQs
 
 === Why global interpreter lock (GIL) in CPython?
