@@ -44,6 +44,10 @@ IMPORTANT: Code examples
 
 == Tips and tricks
 
+=== Suppressing banner
+
+For SBCL: use `--noinform` argument when starting.
+
 === Getting current working directory
 
 * Avoid `*default-pathname-defaults*`, it's implementation-dependent.
