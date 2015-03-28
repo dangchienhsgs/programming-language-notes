@@ -11,6 +11,18 @@
 
 == Tips and tricks
 
+=== Checking if a variable is defined
+
+[source,python,linenums]
+----
+try:
+    the_var
+except NameError:
+    print("Undefined")
+else:
+    print("Defined")
+----
+
 === `pip install` inside Python
 
 Reference: http://stackoverflow.com/questions/12332975/installing-python-module-within-code
