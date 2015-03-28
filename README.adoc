@@ -2,7 +2,7 @@
 
 Personal collection of notes on programming language.
 
-[quote, Linus Torvalds]
+[quote,Linus Torvalds]
 ____
 Talk is cheap. Show me the code.
 ____
@@ -19,6 +19,8 @@ List of notes:
 
 * link:Common-Lisp.adoc[Common Lisp] -
   http://reference-error.org/guides/Common-Lisp.html[HTML version].
+
+* link:Python.adoc[Python].
 
 == License
 
