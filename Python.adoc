@@ -26,6 +26,16 @@ def install(package):
 install('tornado')
 ----
 
+===  Install numpy and scipy in virtualenv
+
+For Ubuntu/Debian:
+
+[source,bash,linenums]
+----
+sudo apt-get install -y gfortran libopenblas-dev liblapack-dev
+pip install numpy scipy
+----
+
 == FAQs
 
 === Why global interpreter lock (GIL) in CPython?
