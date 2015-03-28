@@ -72,7 +72,7 @@ pip install numpy scipy
   http://stackoverflow.com/questions/265687/why-the-global-interpreter-lock
 +
 [quote]
-----
+____
 In general, for any thread safety problem you will need to protect your
 internal data structures with locks. This can be done with various levels of
 granularity.
@@ -81,30 +81,30 @@ granularity.
   lock.
 * You can use coarse-grained locking where one lock protects everything (the
   GIL approach).
-----
+____
 +
 [quote]
-----
+____
 Fine-grained locking allows greater paralellism - two threads can execute in
 paralell when they don't share any resources. However there is a much larger
 administrative overhead. For every line of code, you may need to acquire and
 release several locks.
-----
+____
 +
 [quote]
-----
+____
 The coarse grained approach is the opposite. Two threads can't run at the same
 time, but an individual thread will run faster because its not doing so much
 bookkeeping. Ultimately it comes down to a tradeoff between single-threaded
 speed and paralellism.
-----
+____
 
 * Source #2:
   http://programmers.stackexchange.com/questions/186889/why-was-python-written-with-the-gil[Why
   Was Python Written with the GIL?]
 +
 [quote]
-----
+____
 The GIL is controversial because it prevents multithreaded CPython programs
 from taking full advantage of multiprocessor systems in certain
 situations. Note that potentially blocking or long-running operations, such as
@@ -112,4 +112,4 @@ I/O, image processing, and NumPy number crunching, happen outside
 the GIL. Therefore it is only in multithreaded programs that spend a lot of
 time inside the GIL, interpreting CPython bytecode, that the GIL becomes a
 bottleneck.
-----
+____
