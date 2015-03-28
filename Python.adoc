@@ -23,9 +23,25 @@ else:
     print("Defined")
 ----
 
+=== Calculating MD5 digest
+
+Source: http://stackoverflow.com/questions/5297448/how-to-get-md5-sum-of-a-string
+
+[source,python,linenums]
+----
+import hashlib
+
+
+def md5_digest(s):
+    """Calculates an MD5 digest of a string."""
+    m = hashlib.md5()
+    m.update("s")
+    return m.hexdigest()
+----
+
 === `pip install` inside Python
 
-Reference: http://stackoverflow.com/questions/12332975/installing-python-module-within-code
+Source: http://stackoverflow.com/questions/12332975/installing-python-module-within-code
 
 [source,python,linenums]
 ----
