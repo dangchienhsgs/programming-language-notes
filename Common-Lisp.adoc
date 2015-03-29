@@ -326,7 +326,7 @@ implementation-independent, and that has component values that are
 implementation-independent
 ____
 
-* From http://www.gigamonkeys.com/book[Practical Common Lisp]
+* From http://www.gigamonkeys.com/book[Practical Common Lisp]:
 +
 [quote]
 ____
