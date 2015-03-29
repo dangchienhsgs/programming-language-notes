@@ -257,6 +257,24 @@ With `cl-cwd` and `cl-fad` libraries:
 (use-package "cl-fad")
 (cwd (path:basename *load-truename*))
 ----
+
+=== Using temporary file
+
+``cl-fad``'s `open-temporary` opens a temporary file and returns the stream
+corresponding to that file.  For conveniences, `with-output-to-temporary-file`
+is often a better suit.
+
+[source,lisp,linenums]
+----
+(cl-fad:with-output-to-temporary-file (out)
+  (format out "Hello World"))
+;; ⇨ #P"/tmp/temp-yccc29mc"
+
+(with-open-file (in #P"/tmp/temp-yccc29mc")
+  (read-line in))
+;; ⇨ "Hello World"
+----
+
 == FAQs
 
 === What is truename?
