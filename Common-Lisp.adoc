@@ -334,6 +334,19 @@ is often a better suit.
 (file-namestring #P"/home/batman")  ;; ⇨ "batman"
 (file-namestring #P"/home/batman/") ;; ⇨ ""
 ----
+
+=== Comparing pathnames
+
+With `cl-fad` library
+
+[source,lisp,linenums]
+----
+(equalp #P"/home/batman" "/home/batman") ;; ⇨ NIL
+
+(use-package :cl-fad)
+(path:= #P"/home/batman" "/home/batman") ;; ⇨ T
+----
+
 == FAQs
 
 === What is truename?
