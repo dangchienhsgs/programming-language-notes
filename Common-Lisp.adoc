@@ -387,5 +387,10 @@ ____
 In modern system, it's safe to ignore the difference between logical and
 physical pathnames.
 
+== Useful libraries
 
-Truename is a pathname with any file system-level translations such as resolving symbolic links performed.
+* Pathnames and operating system interfaces: `cl-pad`, `cl-cwd`, and `osicat`
+  - http://weitz.de/cl-fad
+  - https://www.common-lisp.net/project/osicat/manual/osicat.html
+  - https://github.com/Inaimathi/cl-cwd/
+
