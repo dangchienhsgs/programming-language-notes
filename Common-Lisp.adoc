@@ -298,7 +298,7 @@ is often a better suit.
 (directory-namestring "/home/batman/") ;; ⇨ "/home/batman/"
 ----
 
-* With `path` package in `cl-fad` library:
+* With `path` package from `cl-fad` library:
 +
 [source,lisp,linenums]
 ----
