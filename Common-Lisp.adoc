@@ -44,6 +44,78 @@ IMPORTANT: Code examples
 
 == Tips and tricks
 
+=== Dumping core
+
+For better startup time and ease of distribution, I usually load all necessary
+libraries into a core, then dump it with `trivial-dump-core`.  The code would
+look similar to this:
+
+.dump-core.lisp
+[source,lisp,linenums]
+----
+;;
+;; Load Quicklisp
+;;
+
+#-quicklisp
+(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
+                                       (user-homedir-pathname))))
+  (when (probe-file quicklisp-init)
+    (load quicklisp-init)))
+
+(ql:quickload "quicklisp-slime-helper" :verbose nil :silent t)
+
+;;
+;; Load necessary packages
+;;
+
+(ql:quickload '("trivial-dump-core"
+                "cl-fad"
+                "trivial-utf-8"))
+
+;;
+;; And use them by default
+;;
+
+(use-package :cl-fad)
+(use-package :trivial-dump-core)
+(use-package :trivial-utf-8)
+
+;;
+;; Some user-defined functions
+;;
+
+(defun slurp (filespec &key (utf-8 t))
+  "Reads and returns the whole file as string.  If `UTF-8' is `T' (default),
+the file is read as UTF-8 string; otherwise, it's ANSI string."
+  (if utf-8
+      (with-open-file (in filespec :element-type '(unsigned-byte 8))
+        (read-utf-8-string in :stop-at-eof t))
+      (with-open-file (in filespec)
+        (let ((seq (make-string (file-length in))))
+          (read-sequence seq in)
+          seq))))
+
+;;
+;; Now, dump it
+;;
+
+(dump-image "/tmp/batman.core")
+----
+
+To load the core for each working session, I create a script with content
+similar to the following:
+
+.sbcl-batman
+[source,lisp,linenums]
+----
+#!/bin/sh
+
+sbcl --noinform --core /tmp/batman.core "$@"
+----
+
+And voilà, everything is loaded and ready.
+
 === Suppressing banner
 
 For SBCL: use `--noinform` argument when starting.
