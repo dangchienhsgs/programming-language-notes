@@ -266,8 +266,8 @@ With `cl-cwd` and `cl-fad` libraries:
 
 [source,lisp,linenums]
 ----
-(use-package "cl-cwd")
-(use-package "cl-fad")
+(use-package :cl-cwd)
+(use-package :cl-fad)
 (cwd (path:basename *load-truename*))
 ----
 
