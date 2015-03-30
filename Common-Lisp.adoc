@@ -235,6 +235,19 @@ With `cl-fad` library:
 (cl-fad:directory-exists-p #P"/tmp/tmp.txt") ;; ⇨ NIL
 ----
 
+=== Calculating MD5 of a string
+
+With `ironclad` library:
+
+[source,lisp,linenums]
+----
+(defun md5 (str)
+  "Calculates MD5 hash of a string."
+  (ironclad:byte-array-to-hex-string
+   (ironclad:digest-sequence :md5 
+                             (ironclad:ascii-string-to-byte-array str))))
+----
+
 === Merging pathnames
 
 With `cl-fad` library:
