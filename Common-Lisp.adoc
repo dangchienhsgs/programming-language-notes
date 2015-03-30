@@ -419,6 +419,31 @@ With `cl-fad` library
 (path:= #P"/home/batman" "/home/batman") ;; ⇨ T
 ----
 
+=== Bitwise operations
+
+[source,lisp,linenums]
+----
+(let ((a 7)
+      (b 8))
+  ;; AND
+  (print (logand a b))                  ; ⇨ 0
+
+  ;; OR = IOR = inclusive OR
+  (print (logior a b))                  ; ⇨ 15
+
+  ;; XOR
+  (print (logxor a b))                  ; ⇨ 15
+
+  ;; NOT
+  (print (lognot a))                    ; ⇨ -8
+
+  ;; Shift left
+  (print (ash a b))                     ; ⇨ 1792
+
+  ;; Shift right
+  (print (ash a 2)))                    ; ⇨ 28
+----
+
 == FAQs
 
 === What is truename?
