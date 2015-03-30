@@ -466,3 +466,5 @@ physical pathnames.
   - https://www.common-lisp.net/project/osicat/manual/osicat.html
   - https://github.com/Inaimathi/cl-cwd/
 
+* Core dumping: https://github.com/rolpereira/trivial-dump-core
+
