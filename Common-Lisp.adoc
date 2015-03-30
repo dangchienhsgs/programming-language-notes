@@ -316,6 +316,24 @@ is often a better suit.
 (cl-fad:pathname-directory-pathname #P"/home/batman/")           ;; ⇨ #P"/home/batman/"
 (cl-fad:pathname-directory-pathname #P"/home/batman/hello.txt")  ;; ⇨ #P"/home/batman/"
 ----
+
+=== Extracting basename/filename
+
+* With `path` package from `cl-fad` library:
++
+[source,lisp,linenums]
+----
+(path:basename #P"/home/batman")  ;; ⇨ #P"batman"
+(path:basename #P"/home/batman/") ;; ⇨ #P""
+----
+
+* Or with plain old Common Lisp standard:
++
+[source,lisp,linenums]
+----
+(file-namestring #P"/home/batman")  ;; ⇨ "batman"
+(file-namestring #P"/home/batman/") ;; ⇨ ""
+----
 == FAQs
 
 === What is truename?
