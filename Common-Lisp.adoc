@@ -298,15 +298,17 @@ is often a better suit.
 (directory-namestring "/home/batman/") ;; ⇨ "/home/batman/"
 ----
 
-* With `cl-fad` library:
+* With `path` package in `cl-fad` library:
 +
 [source,lisp,linenums]
 ----
+(use-package :cl-fad)
+
 (path:dirname #P"/home/batman")  ;; ⇨ #P"/home/"
 (path:dirname #P"/home/batman/") ;; ⇨ #P"/home/batman/"
 ----
 
-* With `cl-pad`:
+* Or with `cl-pad` directly:
 +
 [source,lisp,linenums]
 ----
