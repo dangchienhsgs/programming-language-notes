@@ -467,4 +467,3 @@ physical pathnames.
   - https://github.com/Inaimathi/cl-cwd/
 
 * Core dumping: https://github.com/rolpereira/trivial-dump-core
-
