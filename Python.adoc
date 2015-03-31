@@ -1,0 +1,115 @@
+= Quick notes on Python
+:Author: Nguyễn Hà Dương (cmpitg)
+:Email: <cmpitg@gmail.com>
+:toc: left
+:toclevels: 4
+:numbered:
+:source-highlighter: pygments
+:pygments-css: class
+:icons: font
+:imagesdirs: ../assets/images
+
+== Tips and tricks
+
+=== Checking if a variable is defined
+
+[source,python,linenums]
+----
+try:
+    the_var
+except NameError:
+    print("Undefined")
+else:
+    print("Defined")
+----
+
+=== Calculating MD5 digest
+
+Source: http://stackoverflow.com/questions/5297448/how-to-get-md5-sum-of-a-string
+
+[source,python,linenums]
+----
+import hashlib
+
+
+def md5_digest(s):
+    """Calculates an MD5 digest of a string."""
+    m = hashlib.md5()
+    m.update("s")
+    return m.hexdigest()
+----
+
+=== `pip install` inside Python
+
+Source: http://stackoverflow.com/questions/12332975/installing-python-module-within-code
+
+[source,python,linenums]
+----
+import pip
+
+
+def install(package):
+    pip.main(['install', package])
+
+install('tornado')
+----
+
+===  Install numpy and scipy in virtualenv
+
+For Ubuntu/Debian:
+
+[source,bash,linenums]
+----
+sudo apt-get install -y gfortran libopenblas-dev liblapack-dev
+pip install numpy scipy
+----
+
+== FAQs
+
+=== Why global interpreter lock (GIL) in CPython?
+
+* Source #1:
+  http://stackoverflow.com/questions/265687/why-the-global-interpreter-lock
++
+[quote]
+____
+In general, for any thread safety problem you will need to protect your
+internal data structures with locks. This can be done with various levels of
+granularity.
+
+* You can use fine-grained locking, where every seperate structure has its own
+  lock.
+* You can use coarse-grained locking where one lock protects everything (the
+  GIL approach).
+____
++
+[quote]
+____
+Fine-grained locking allows greater paralellism - two threads can execute in
+paralell when they don't share any resources. However there is a much larger
+administrative overhead. For every line of code, you may need to acquire and
+release several locks.
+____
++
+[quote]
+____
+The coarse grained approach is the opposite. Two threads can't run at the same
+time, but an individual thread will run faster because its not doing so much
+bookkeeping. Ultimately it comes down to a tradeoff between single-threaded
+speed and paralellism.
+____
+
+* Source #2:
+  http://programmers.stackexchange.com/questions/186889/why-was-python-written-with-the-gil[Why
+  Was Python Written with the GIL?]
++
+[quote]
+____
+The GIL is controversial because it prevents multithreaded CPython programs
+from taking full advantage of multiprocessor systems in certain
+situations. Note that potentially blocking or long-running operations, such as
+I/O, image processing, and NumPy number crunching, happen outside
+the GIL. Therefore it is only in multithreaded programs that spend a lot of
+time inside the GIL, interpreting CPython bytecode, that the GIL becomes a
+bottleneck.
+____

@@ -2,7 +2,7 @@
 
 Personal collection of notes on programming language.
 
-[quote, Linus Torvalds]
+[quote,Linus Torvalds]
 ____
 Talk is cheap. Show me the code.
 ____
@@ -17,11 +17,14 @@ Your help is much appreciated.
 
 List of notes:
 
-* link:Common-Lisp.adoc[Common Lisp]
+* link:Common-Lisp.adoc[Common Lisp] -
+  http://reference-error.org/guides/Common-Lisp.html[HTML version].
+
+* link:Python.adoc[Python].
 
 == License
 
 All materials in this repository are published under the terms of the FreeBSD
-license.  Please see link:COPYING[+COPYING+] for further information.
+license.  Please see link:COPYING[`COPYING`] for further information.
 
 Copyright (c) 2015, Duong H. Nguyen <cmpitg@gmail.com>

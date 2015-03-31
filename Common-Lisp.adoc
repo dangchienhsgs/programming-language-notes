@@ -4,11 +4,12 @@
 :toc: left
 :toclevels: 4
 :numbered:
-:icons: font
+:source-highlighter: pygments
 :pygments-css: class
+:icons: font
 :imagesdirs: ../assets/images
 
-TODO: Code examples
+IMPORTANT: Code examples
 
 * http://rosettacode.org
 
@@ -18,30 +19,111 @@ TODO: Code examples
 
 * Notes about discard-next-char
 
-* Notes about +(read input-stream t nil t)+ idiom:
-** +(with-input-from-string (is " ") (read is nil 'the-end))+ returns +THE-END+
-** +(with-input-from-string (is " ") (read is t <anything>))+ throws error.
-** +recursive-p+ is +t+ means we expect this +read+ call is inside a reader macro
+* Notes about `(read input-stream t nil t)` idiom:
+** `(with-input-from-string (is " ") (read is nil 'the-end))` returns `THE-END`
+** `(with-input-from-string (is " ") (read is t <anything>))` throws error.
+** `recursive-p` is `t` means we expect this `read` call is inside a reader macro
 
-* Notes about +read-delimited-list+ and reader macro: http://www.lispworks.com/documentation/HyperSpec/Body/f_rd_del.htm
+* Notes about `read-delimited-list` and reader macro: http://www.lispworks.com/documentation/HyperSpec/Body/f_rd_del.htm
 
 * Notes about writing reader macro in JSON: https://gist.github.com/chaitanyagupta/9324402
 
 * Notes about writing reader macros in practice with https://common-lisp.net/project/named-readtables/
 
+* Notes about extracting filename and extracting file extensions.
+
+* Notes about readtable:
+** Custom vector literal
+** https://common-lisp.net/project/named-readtables/
+
+* Good utils:
+** https://github.com/vseloved/rutils
+** https://github.com/vseloved/rutils/blob/master/docs/ann-rutils.md
+
 '''
-
-== Recommended setup (objective)
-
-* Emacs with Slime
-* Quicklisp as package manager
 
 == Tips and tricks
 
+=== Dumping core
+
+For better startup time and ease of distribution, I usually load all necessary
+libraries into a core, then dump it with `trivial-dump-core`.  The code would
+look similar to this:
+
+.dump-core.lisp
+[source,lisp,linenums]
+----
+;;
+;; Load Quicklisp
+;;
+
+#-quicklisp
+(let ((quicklisp-init (merge-pathnames "quicklisp/setup.lisp"
+                                       (user-homedir-pathname))))
+  (when (probe-file quicklisp-init)
+    (load quicklisp-init)))
+
+(ql:quickload "quicklisp-slime-helper" :verbose nil :silent t)
+
+;;
+;; Load necessary packages
+;;
+
+(ql:quickload '("trivial-dump-core"
+                "cl-fad"
+                "trivial-utf-8"))
+
+;;
+;; And use them by default
+;;
+
+(use-package :cl-fad)
+(use-package :trivial-dump-core)
+(use-package :trivial-utf-8)
+
+;;
+;; Some user-defined functions
+;;
+
+(defun slurp (filespec &key (utf-8 t))
+  "Reads and returns the whole file as string.  If `UTF-8' is `T' (default),
+the file is read as UTF-8 string; otherwise, it's ANSI string."
+  (if utf-8
+      (with-open-file (in filespec :element-type '(unsigned-byte 8))
+        (read-utf-8-string in :stop-at-eof t))
+      (with-open-file (in filespec)
+        (let ((seq (make-string (file-length in))))
+          (read-sequence seq in)
+          seq))))
+
+;;
+;; Now, dump it
+;;
+
+(dump-image "/tmp/batman.core")
+----
+
+To load the core for each working session, I create a script with content
+similar to the following:
+
+.sbcl-batman
+[source,lisp,linenums]
+----
+#!/bin/sh
+
+sbcl --noinform --core /tmp/batman.core "$@"
+----
+
+And voilà, everything is loaded and ready.
+
+=== Suppressing banner
+
+For SBCL: use `--noinform` argument when starting.
+
 === Getting current working directory
 
-* Avoid +\*default-pathname-defaults*+, it's implementation-dependent.
-* (SBCL) SBCL: +(sb-posix:getcwd)+.
+* Avoid `*default-pathname-defaults*`, it's implementation-dependent.
+* (SBCL) SBCL: `(sb-posix:getcwd)`.
 
 [source,lisp,linenums]
 ----
@@ -52,7 +134,7 @@ TODO: Code examples
 (osicat:current-directory)
 ----
 
-=== Changing current working directory/+cd+
+=== Changing current working directory/`cd`
 
 [source,lisp,linenums]
 ----
@@ -72,11 +154,14 @@ TODO: Code examples
 
 === Getting current file
 
-+\*load-truename*+ or +\*load-pathname*+, returning truename and pathname,
-respectively.  In modern system and practice, two kinds of pathnames could be
-used interchangably.
+`*load-truename*` or `*load-pathname*`, returning truename and pathname,
+respectively.
 
 === Reading/slurping file
+
+Avoid using `open` and `close` as 1) it's error-prone, and 2) the file might
+not properly closed if you don't properly handle it.  Instead, use
+`with-open-file`.
 
 * Simplest way to read a line from a file:
 +
@@ -86,12 +171,21 @@ used interchangably.
   (format t "~A~%" (read-line in)))
 ----
 
-* Useful functions: +read-line+, +read-char+, +peek-char+, +file-position+
+* Reading binary:
++
+[source,lisp,linenums]
+----
+(with-open-file (in #P"/tmp/tmp.txt" :element-type '(unsigned-byte 8))
+  (read-byte in))
+----
+
+
+* Useful functions: `read-line`, `read-char`, `peek-char`, `file-position`
   (jumping to a position).
 
 * To read whole file:
 
-** The best way is probably to use +read-utf-8-string+ from +trivial-utf-8+
+** The best way is probably to use `read-utf-8-string` from `trivial-utf-8`
    library:
 +
 [source,lisp,linenums]
@@ -103,7 +197,7 @@ used interchangably.
 ----
 
 ** Or if you don't care about encoding thing and just want to read ASCII, one
-   way is to use +read-sequence+ with +file-length+ to read the content of the
+   way is to use `read-sequence` with `file-length` to read the content of the
    file into a string:
 +
 [source,lisp,linenums]
@@ -118,15 +212,283 @@ used interchangably.
 
 [source,lisp,linenums]
 ----
-(merge-pathnames #p"lib/misc" #p"/home/batman")  ;; ⇨ #P"/home/lib/misc"
-(merge-pathnames #p"lib/misc" #p"/home/batman/") ;; ⇨ #P"/home/batman/lib/misc"
-(merge-pathnames #p"lib/misc" #p"home/batman")   ;; ⇨ #P"home/lib/misc"
-(merge-pathnames #p"lib/misc" #p"home/batman/")  ;; ⇨ #P"home/batman/lib/misc"
+(merge-pathnames #P"lib/misc" #P"/home/batman")  ;; ⇨ #P"/home/lib/misc"
+(merge-pathnames #P"lib/misc" #P"/home/batman/") ;; ⇨ #P"/home/batman/lib/misc"
+(merge-pathnames #P"lib/misc" #P"home/batman")   ;; ⇨ #P"home/lib/misc"
+(merge-pathnames #P"lib/misc" #P"home/batman/")  ;; ⇨ #P"home/batman/lib/misc"
 ----
+
 === Getting path to a system loaded with ASDF
 
 [source,lisp,linenums]
 ----
 (asdf:system-source-directory :optima) ;; ⇨ #P"/home/batman/quicklisp/dists/quicklisp/software/optima-20150302-git/"
 ----
+
+=== Writing to file
+
+* Write when file doesn't exist.  The following code will signal an error if
+  `/tmp/tmp.txt` exists:
++
+[source,lisp,linenums]
 ----
+(with-open-file (out #P"/tmp/tmp.txt" :direction :output)
+  (format t "Hello World~%"))
+----
+
+* Overwrite if file exists.  Note that `:if-exists` is `:supersude`, **not** `:overwrite`:
++
+[source,lisp,linenums]
+----
+(with-open-file (out #P"/tmp/tmp.txt"
+                     :direction :output
+                     :if-exists :supersede)
+  (format out "Xin chào thế giới~%"))
+----
+* Overwrite, starting from the beginning of the file.  Note that Note that `:if-exists` is `:overwrite`:
++
+[source,lisp,linenums]
+----
+(with-open-file (out #P"/tmp/tmp.txt"
+                     :direction :output
+                     :if-exists :supersede)
+  (format out "Hello world!~%"))
+
+(with-open-file (out #P"/tmp/tmp.txt"
+                     :direction :output
+                     :if-exists :overwrite)
+  (format out "Bye  "))
+
+(with-open-file (in #P"/tmp/tmp.txt")
+  (read-line in))
+;;; ⇨ "Bye  world!
+----
+* Write binary:
++
+[source,lisp,linenums]
+----
+(with-open-file (out #P"/tmp/abc.txt"
+                     :direction :output
+                     :element-type '(unsigned-byte 8))
+  (write-byte 97 out)
+  (write-byte 98 out)
+  (write-byte 99 out))
+;;; Write out "abc"
+----
+
+=== Listing directory
+
+With `cl-pad` library:
+
+[source,lisp,linenums]
+----
+(cl-pad:list-directory #P"/tmp/")                      ;; ⇨ List
+(cl-pad:list-directory #P"/tmp/" :follow-symlinks t)   ;; ⇨ List
+----
+
+=== Checking if a file or directory exists
+
+Either `probe-file` or `cl-fad`'s `file-exists` would work.
+
+[source,lisp,linenums]
+----
+(probe-file #P"/home/batman")           ;; ⇨ #P"/home/batman/"
+(cl-fad:file-exists-p #P"/home/batman") ;; ⇨ #P"/home/batman/"
+(cl-fad:file-exists-p #P"/home/batma")  ;; ⇨ NIL
+----
+
+==== Checking directory exists only
+
+With `cl-fad` library:
+
+[source,lisp,linenums]
+----
+(cl-fad:directory-exists-p #P"/home/cmpitg") ;; ⇨ #P"/home/cmpitg/"
+(cl-fad:directory-exists-p #P"/tmp/tmp.txt") ;; ⇨ NIL
+----
+
+=== Calculating MD5 of a string
+
+With `ironclad` library:
+
+[source,lisp,linenums]
+----
+(defun md5 (str)
+  "Calculates MD5 hash of a string."
+  (ironclad:byte-array-to-hex-string
+   (ironclad:digest-sequence :md5 
+                             (ironclad:ascii-string-to-byte-array str))))
+----
+
+=== Merging pathnames
+
+With `cl-fad` library:
+
+[source,lisp,linenums]
+----
+(path:catfile #P"/home/cmpitg" "tmp.txt")                    ;; ⇨ #P"/home/tmp.txt"
+(path:catfile #P"/home/cmpitg/" "tmp.txt")                   ;; ⇨ #P"/home/cmpitg/tmp.txt"
+(cl-fad:merge-pathnames-as-file #P"/home/cmpitg" "tmp.txt")  ;; ⇨ #P"/home/tmp.txt"
+(cl-fad:merge-pathnames-as-file #P"/home/cmpitg/" "tmp.txt") ;; ⇨ #P"/home/cmpitg/tmp.txt"
+----
+
+=== `cd` to directory of current loading file
+
+With `cl-cwd` and `cl-fad` libraries:
+
+[source,lisp,linenums]
+----
+(use-package :cl-cwd)
+(use-package :cl-fad)
+(cwd (path:basename *load-truename*))
+----
+
+=== Using temporary file
+
+``cl-fad``'s `open-temporary` opens a temporary file and returns the stream
+corresponding to that file.  For conveniences, `with-output-to-temporary-file`
+is often a better suit.
+
+[source,lisp,linenums]
+----
+(cl-fad:with-output-to-temporary-file (out)
+  (format out "Hello World"))
+;; ⇨ #P"/tmp/temp-yccc29mc"
+
+(with-open-file (in #P"/tmp/temp-yccc29mc")
+  (read-line in))
+;; ⇨ "Hello World"
+----
+
+=== Extracting dirname/parent directory
+
+* Plain old Common Lisp:
++
+[source,lisp,linenums]
+----
+(directory-namestring "/home/batman")  ;; ⇨ "/home/"
+(directory-namestring "/home/batman/") ;; ⇨ "/home/batman/"
+----
+
+* With `path` package from `cl-fad` library:
++
+[source,lisp,linenums]
+----
+(use-package :cl-fad)
+
+(path:dirname #P"/home/batman")  ;; ⇨ #P"/home/"
+(path:dirname #P"/home/batman/") ;; ⇨ #P"/home/batman/"
+----
+
+* Or with `cl-pad` directly:
++
+[source,lisp,linenums]
+----
+(cl-fad:pathname-directory-pathname #P"/home/batman")            ;; ⇨ #P"/home/"
+(cl-fad:pathname-directory-pathname #P"/home/batman/")           ;; ⇨ #P"/home/batman/"
+(cl-fad:pathname-directory-pathname #P"/home/batman/hello.txt")  ;; ⇨ #P"/home/batman/"
+----
+
+=== Extracting basename/filename
+
+* With `path` package from `cl-fad` library:
++
+[source,lisp,linenums]
+----
+(path:basename #P"/home/batman")  ;; ⇨ #P"batman"
+(path:basename #P"/home/batman/") ;; ⇨ #P""
+----
+
+* Or with plain old Common Lisp standard:
++
+[source,lisp,linenums]
+----
+(file-namestring #P"/home/batman")  ;; ⇨ "batman"
+(file-namestring #P"/home/batman/") ;; ⇨ ""
+----
+
+=== Comparing pathnames
+
+With `cl-fad` library
+
+[source,lisp,linenums]
+----
+(equalp #P"/home/batman" "/home/batman") ;; ⇨ NIL
+
+(use-package :cl-fad)
+(path:= #P"/home/batman" "/home/batman") ;; ⇨ T
+----
+
+=== Bitwise operations
+
+[source,lisp,linenums]
+----
+(let ((a 7)
+      (b 8))
+  ;; AND
+  (print (logand a b))                  ; ⇨ 0
+
+  ;; OR = IOR = inclusive OR
+  (print (logior a b))                  ; ⇨ 15
+
+  ;; XOR
+  (print (logxor a b))                  ; ⇨ 15
+
+  ;; NOT
+  (print (lognot a))                    ; ⇨ -8
+
+  ;; Shift left
+  (print (ash a b))                     ; ⇨ 1792
+
+  ;; Shift right
+  (print (ash a 2)))                    ; ⇨ 28
+----
+
+== FAQs
+
+=== What is truename?
+
+From
+http://www.lispworks.com/documentation/lw51/CLHS/Body/20_ac.htm[HyperSpec]:
+
+[quote]
+____
+Truename is a pathname with any file system-level translations such as
+resolving symbolic links performed.
+____
+
+=== Difference between physical and logical pathname?
+
+* From
+  http://www.lispworks.com/documentation/lw51/CLHS/Body/t_logica.htm[HyperSpec]:
++
+[quote]
+____
+(Logical pathname is) A pathname that uses a namestring syntax that is
+implementation-independent, and that has component values that are
+implementation-independent
+____
+
+* From http://www.gigamonkeys.com/book[Practical Common Lisp]:
++
+[quote]
+____
+Logical pathnames allow Common Lisp programs to contain references to
+pathnames without naming specific files. Logical pathnames could then be
+mapped to specific locations in an actual file system when the program was
+installed by defining a "logical pathname translation" that translates logical
+pathnames matching certain wildcards to pathnames representing files in the
+file system, so-called physical pathnames.
+____
+
+In modern system, it's safe to ignore the difference between logical and
+physical pathnames.
+
+== Useful libraries
+
+* Pathnames and operating system interfaces: `cl-pad`, `cl-cwd`, and `osicat`
+  - http://weitz.de/cl-fad
+  - https://www.common-lisp.net/project/osicat/manual/osicat.html
+  - https://github.com/Inaimathi/cl-cwd/
+
+* Core dumping: https://github.com/rolpereira/trivial-dump-core
