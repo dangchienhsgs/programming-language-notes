@@ -497,3 +497,6 @@ physical pathnames.
 
 * Unicode utilities: http://weitz.de/cl-unicode/[cl-unicode] and
   https://common-lisp.net/project/trivial-utf-8/[Trivial-utf-8].
+
+* HTTP client: http://weitz.de/drakma/[Drakma] for the original version, and
+  https://github.com/orthecreedence/drakma-async[Drakma-async] for async version.
