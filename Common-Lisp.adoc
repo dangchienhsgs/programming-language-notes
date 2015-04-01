@@ -500,3 +500,6 @@ physical pathnames.
 
 * HTTP client: http://weitz.de/drakma/[Drakma] for the original version, and
   https://github.com/orthecreedence/drakma-async[Drakma-async] for async version.
+
+* Data structure:
+** https://github.com/Ramarren/ropes[Rope]
