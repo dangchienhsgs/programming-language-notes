@@ -503,3 +503,5 @@ physical pathnames.
 
 * Data structure:
 ** https://github.com/Ramarren/ropes[Rope]
+
+* Pattern matching: https://github.com/m2ym/optima[Optima].
