@@ -488,5 +488,12 @@ physical pathnames.
 
 * Pathnames and operating system interfaces: http://weitz.de/cl-fad[cl-pad],
   https://www.common-lisp.net/project/osicat/manual/osicat.html[cl-cwd], and
+  https://github.com/Inaimathi/cl-cwd/[Osicat].
 
-* Core dumping: https://github.com/rolpereira/trivial-dump-core
+* Core dumping: https://github.com/rolpereira/trivial-dump-core[Trivial dump
+  core].
+
+* Regular expression: http://weitz.de/cl-ppcre/[cl-ppcre].
+
+* Unicode utilities: http://weitz.de/cl-unicode/[cl-unicode] and
+  https://common-lisp.net/project/trivial-utf-8/[Trivial-utf-8].
