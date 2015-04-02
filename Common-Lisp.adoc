@@ -501,7 +501,30 @@ physical pathnames.
 * HTTP client: http://weitz.de/drakma/[Drakma] for the original version, and
   https://github.com/orthecreedence/drakma-async[Drakma-async] for async version.
 
+* HTTP server:
+** http://weitz.de/hunchentoot/[Hunchentoot] is rock solid, feature-rich, and
+   reliable.
+** https://github.com/fukamachi/woo[Woo] is non-blocking, new, modern, and
+   aims to be fastest web server ever written:
+*** Built on top of http://software.schmorp.de/pkg/libev.html[libev];
+*** Beats Node.js in most benchmarks and is comparable with Go;
+*** Supports cluster.
+
 * Data structure:
 ** https://github.com/Ramarren/ropes[Rope]
 
 * Pattern matching: https://github.com/m2ym/optima[Optima].
+
+* YAML parser: https://github.com/eudoxia0/cl-yaml[cl-yaml].
+
+* Downloader: https://github.com/eudoxia0/trivial-download[trivial-download].
+
+* SSH client library: https://github.com/eudoxia0/trivial-ssh[trivial-ssh],
+  built on libssh2.
+
+* Compress file extraction:
+  https://github.com/eudoxia0/trivial-extract[trivial-extract].
+
+* Password hashing and verification:
+  https://github.com/eudoxia0/cl-pass[cl-pass].
+
