@@ -549,3 +549,13 @@ physical pathnames.
 
 * https://github.com:eudoxia0/asdf-linguist.git[asdf-linguist] makes ASDF
   useful as a build tool for languages other than Common Lisp.
+
+* Common Lisp's killer features:
+
+** Macro system makes powerful construct possible:
+*** http://www.ai.sri.com/pkarp/loop.html[Loop macro]
+*** https://common-lisp.net/project/iterate/[Interate] for cleaner and better
+    looping
+
+** Powerful object system with CLOS:
+*** http://cl-cookbook.sourceforge.net/clos-tutorial/[CLOS fundamentals]
