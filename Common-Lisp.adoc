@@ -444,6 +444,13 @@ With `cl-fad` library
   (print (ash a 2)))                    ; ⇨ 28
 ----
 
+=== Slime - Starting swank server
+
+[source,lisp,linenums]
+----
+(swank:create-server :port 4005 :style :spawn :dont-close t)
+----
+
 == FAQs
 
 === What is truename?
