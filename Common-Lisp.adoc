@@ -451,6 +451,15 @@ With `cl-fad` library
 (swank:create-server :port 4005 :style :spawn :dont-close t)
 ----
 
+=== Updating Quicklisp systems and clients
+
+[source,lisp,linenums]
+----
+(ql:update-client)
+(ql:update-dist "package-name")
+(ql:update-all-dists)
+----
+
 == FAQs
 
 === What is truename?
