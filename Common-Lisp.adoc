@@ -528,6 +528,8 @@ physical pathnames.
 * Password hashing and verification:
   https://github.com/eudoxia0/cl-pass[cl-pass].
 
+* Fast HTTP parser: https://github.com/fukamachi/fast-http[fast-http].
+
 == Other interesting pieces
 
 * https://github.com/robert-strandh/SICL[SICL] is an implementation written in
