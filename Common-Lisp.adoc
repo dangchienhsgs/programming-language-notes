@@ -528,3 +528,15 @@ physical pathnames.
 * Password hashing and verification:
   https://github.com/eudoxia0/cl-pass[cl-pass].
 
+== Other interesting pieces
+
+* https://github.com/robert-strandh/SICL[SICL] is an implementation written in
+  such a way that the implementation is portable as much as possible.  Each
+  SICL module could be integrated into other implementation with no or little
+  change.
+
+* https://github.com/google/lisp-koans[Lisp koans] helps learn Common Lisp
+  more efficient.
+
+* https://github.com:eudoxia0/asdf-linguist.git[asdf-linguist] makes ASDF
+  useful as a build tool for languages other than Common Lisp.
