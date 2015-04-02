@@ -491,6 +491,10 @@ ____
 In modern system, it's safe to ignore the difference between logical and
 physical pathnames.
 
+=== CLISP failed to load Hunchentoot: `MAKE-PATHNAME` error
+
+Find +hunchentoot/acceptor.lisp+ and change +"errors/"+ to +"errors"+.
+
 == Useful libraries
 
 * Pathnames and operating system interfaces: http://weitz.de/cl-fad[cl-pad],
@@ -553,9 +557,9 @@ physical pathnames.
 * Common Lisp's killer features:
 
 ** Macro system makes powerful construct possible:
-*** http://www.ai.sri.com/pkarp/loop.html[Loop macro]
+*** http://www.ai.sri.com/pkarp/loop.html[Loop macro].
 *** https://common-lisp.net/project/iterate/[Interate] for cleaner and better
-    looping
+    looping.
 
 ** Powerful object system with CLOS:
-*** http://cl-cookbook.sourceforge.net/clos-tutorial/[CLOS fundamentals]
+*** http://cl-cookbook.sourceforge.net/clos-tutorial/[CLOS fundamentals].
