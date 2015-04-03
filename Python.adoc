@@ -35,7 +35,7 @@ import hashlib
 def md5_digest(s):
     """Calculates an MD5 digest of a string."""
     m = hashlib.md5()
-    m.update("s")
+    m.update(s)
     return m.hexdigest()
 ----
 
