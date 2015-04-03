@@ -553,6 +553,9 @@ Find +hunchentoot/acceptor.lisp+ and change +"errors/"+ to +"errors"+.
 * Developing graphics demos and games in real-time:
   https://github.com/cbaggers/cepl[Code-Eval-Play-Loop].
 
+* HTML template library:
+** http://weitz.de/cl-who/[cl-who] is thoughtful, mature, and sophisticated.
+
 == Other interesting pieces
 
 * https://github.com/robert-strandh/SICL[SICL] is an implementation written in
