@@ -84,6 +84,63 @@ def write_temp_file(content):
 
     return path
 ----
+
+=== Generating SSH key pairs on file system
+
+Requirement: Pycrypto.
+
+[source,python,linenums]
+----
+from Crypto.PublicKey import RSA
+from tempfile import mkstemp
+from os import fdopen, chmod
+
+import stat
+
+
+def generate_RSA(bits=4096):
+    """
+    Generates an RSA keypair with an exponent of 65537.
+    """
+    new_key      = RSA.generate(bits, e=65537)
+    public_key   = new_key.publickey().exportKey("OpenSSH")
+    private_key  = new_key.exportKey("PEM")
+    return public_key, private_key
+
+
+def write_temp_file(content):
+    """
+    Writes content to a temporary file and returns the file path.
+    """
+    fd, path = mkstemp()
+
+    with fdopen(fd, 'w') as out:
+        out.write(content)
+        out.write("\n")
+
+    return path
+
+
+def gen_keys_write_files():
+    """
+    Generates an RSA key pair and writes them into 2 temporary files: one for 
+    public key and the other one for private key.
+    """
+    pub, priv = generate_RSA()
+    pub_path, priv_path = write_temp_file(pub), write_temp_file(priv)
+
+    # 644 for public key
+    chmod(pub_path, stat.S_IRUSR \
+          | stat.S_IWUSR \
+          | stat.S_IRGRP \
+          | stat.S_IROTH)
+
+    # 600 for private key
+    chmod(priv_path, stat.S_IRUSR | stat.S_IWUSR)
+
+    return pub_path, priv_path
+----
+
 == FAQs
 
 === Why global interpreter lock (GIL) in CPython?
