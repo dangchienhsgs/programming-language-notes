@@ -123,6 +123,16 @@ Then in your code:
 import ipdb; ipdb.set_trace()
 ----
 
+=== Getting site-package path
+
+[source,python,linenums]
+----
+from distutils.sysconfig import get_python_lib
+
+
+print(get_python_lib())
+----
+
 === Generating SSH key pairs on file system
 
 Requirement: Pycrypto.
