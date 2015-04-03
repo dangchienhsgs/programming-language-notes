@@ -105,6 +105,24 @@ while True:
         sys.exit()
 ----
 
+=== Dropping into IPython PDB
+
+Install `ipdb`
+
+[source,bash,linenums]
+----
+pip install ipdb
+----
+
+
+Then in your code:
+
+[source,python,linenums]
+----
+
+import ipdb; ipdb.set_trace()
+----
+
 === Generating SSH key pairs on file system
 
 Requirement: Pycrypto.
