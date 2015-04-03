@@ -113,3 +113,11 @@ the GIL. Therefore it is only in multithreaded programs that spend a lot of
 time inside the GIL, interpreting CPython bytecode, that the GIL becomes a
 bottleneck.
 ____
+
+=== IPython startup script directory
+
+Reference: http://ipython.org/ipython-doc/stable/development/config.html
+
+`$HOME/.ipython/profile_default/startup/`
+
+Just put a Python file like `00-run-something.py`.
