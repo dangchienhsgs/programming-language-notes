@@ -444,6 +444,22 @@ With `cl-fad` library
   (print (ash a 2)))                    ; ⇨ 28
 ----
 
+=== Slime - Starting swank server
+
+[source,lisp,linenums]
+----
+(swank:create-server :port 4005 :style :spawn :dont-close t)
+----
+
+=== Updating Quicklisp systems and clients
+
+[source,lisp,linenums]
+----
+(ql:update-client)
+(ql:update-dist "package-name")
+(ql:update-all-dists)
+----
+
 == FAQs
 
 === What is truename?
@@ -484,11 +500,78 @@ ____
 In modern system, it's safe to ignore the difference between logical and
 physical pathnames.
 
+=== CLISP failed to load Hunchentoot: `MAKE-PATHNAME` error
+
+Find +hunchentoot/acceptor.lisp+ and change +"errors/"+ to +"errors"+.
+
 == Useful libraries
 
-* Pathnames and operating system interfaces: `cl-pad`, `cl-cwd`, and `osicat`
-  - http://weitz.de/cl-fad
-  - https://www.common-lisp.net/project/osicat/manual/osicat.html
-  - https://github.com/Inaimathi/cl-cwd/
+* Pathnames and operating system interfaces: http://weitz.de/cl-fad[cl-pad],
+  https://www.common-lisp.net/project/osicat/manual/osicat.html[cl-cwd], and
+  https://github.com/Inaimathi/cl-cwd/[Osicat].
 
-* Core dumping: https://github.com/rolpereira/trivial-dump-core
+* Core dumping: https://github.com/rolpereira/trivial-dump-core[Trivial dump
+  core].
+
+* Regular expression: http://weitz.de/cl-ppcre/[cl-ppcre].
+
+* Unicode utilities: http://weitz.de/cl-unicode/[cl-unicode] and
+  https://common-lisp.net/project/trivial-utf-8/[Trivial-utf-8].
+
+* HTTP client: http://weitz.de/drakma/[Drakma] for the original version, and
+  https://github.com/orthecreedence/drakma-async[Drakma-async] for async version.
+
+* HTTP server:
+** http://weitz.de/hunchentoot/[Hunchentoot] is rock solid, feature-rich, and
+   reliable.
+** https://github.com/fukamachi/woo[Woo] is non-blocking, new, modern, and
+   aims to be fastest web server ever written:
+*** Built on top of http://software.schmorp.de/pkg/libev.html[libev];
+*** Beats Node.js in most benchmarks and is comparable with Go;
+*** Supports cluster.
+
+* Data structure:
+** https://github.com/Ramarren/ropes[Rope]
+
+* Pattern matching: https://github.com/m2ym/optima[Optima].
+
+* YAML parser: https://github.com/eudoxia0/cl-yaml[cl-yaml].
+
+* Downloader: https://github.com/eudoxia0/trivial-download[trivial-download].
+
+* SSH client library: https://github.com/eudoxia0/trivial-ssh[trivial-ssh],
+  built on libssh2.
+
+* Compress file extraction:
+  https://github.com/eudoxia0/trivial-extract[trivial-extract].
+
+* Password hashing and verification:
+  https://github.com/eudoxia0/cl-pass[cl-pass].
+
+* Fast HTTP parser: https://github.com/fukamachi/fast-http[fast-http].
+
+* Developing graphics demos and games in real-time:
+  https://github.com/cbaggers/cepl[Code-Eval-Play-Loop].
+
+== Other interesting pieces
+
+* https://github.com/robert-strandh/SICL[SICL] is an implementation written in
+  such a way that the implementation is portable as much as possible.  Each
+  SICL module could be integrated into other implementation with no or little
+  change.
+
+* https://github.com/google/lisp-koans[Lisp koans] helps learn Common Lisp
+  more efficient.
+
+* https://github.com:eudoxia0/asdf-linguist.git[asdf-linguist] makes ASDF
+  useful as a build tool for languages other than Common Lisp.
+
+* Common Lisp's killer features:
+
+** Macro system makes powerful construct possible:
+*** http://www.ai.sri.com/pkarp/loop.html[Loop macro].
+*** https://common-lisp.net/project/iterate/[Interate] for cleaner and better
+    looping.
+
+** Powerful object system with CLOS:
+*** http://cl-cookbook.sourceforge.net/clos-tutorial/[CLOS fundamentals].
