@@ -54,7 +54,7 @@ def install(package):
 install('tornado')
 ----
 
-===  Install numpy and scipy in virtualenv
+===  Installing numpy and scipy in virtualenv
 
 For Ubuntu/Debian:
 
