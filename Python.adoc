@@ -85,6 +85,26 @@ def write_temp_file(content):
     return path
 ----
 
+=== Trapping `Ctrl-C` but not SIGTERM
+
+By using `KeyboardInterrupt` exception:
+
+[source,python,linenums]
+----
+import time, sys
+
+
+x = 1
+while True:
+    try:
+        print(x)
+        time.sleep(.3)
+        x += 1
+    except KeyboardInterrupt:
+        print "Bye"
+        sys.exit()
+----
+
 === Generating SSH key pairs on file system
 
 Requirement: Pycrypto.
