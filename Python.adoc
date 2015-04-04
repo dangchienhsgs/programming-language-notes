@@ -64,6 +64,21 @@ sudo apt-get install -y gfortran libopenblas-dev liblapack-dev
 pip install numpy scipy
 ----
 
+=== Installing PIL in virtualenv
+
+Source: http://goo.gl/NOZtUu
+
+[source,python,linenums]
+----
+sudo aptitude install libjpeg-dev
+
+sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib
+sudo ln -s /usr/lib/x86_64-linux-gnu/libfreetype.so /usr/lib
+sudo ln -s /usr/lib/x86_64-linux-gnu/libz.so /usr/lib
+
+pip install -I PIL
+----
+
 === Using temporary file
 
 [source,python,linenums]
