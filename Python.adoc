@@ -226,6 +226,17 @@ def gen_keys_write_files():
     return pub_path, priv_path
 ----
 
+=== Generating cookie secret for web framework
+
+[source,python,linenums]
+----
+import base64
+import uuid
+
+
+print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
+----
+
 == FAQs
 
 === Why global interpreter lock (GIL) in CPython?
