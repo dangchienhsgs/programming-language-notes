@@ -100,6 +100,28 @@ def write_temp_file(content):
     return path
 ----
 
+=== Calling method or function by name
+
+* Calling method:
++
+[source,python,linenums]
+----
+bar = getattr(foo, 'bar')
+result = method(arg_1, arg_2)
+----
+
+* Calling function:
++
+[source,python,linenums]
+----
+locals()["myfunction"]()
+# or
+globals()["myfunction"]()
+----
++
+`locals` returns a dictionary containing local symbol table. `globals`
+returns a dictionary with global symbol table.
+
 === Trapping `Ctrl-C` but not SIGTERM
 
 By using `KeyboardInterrupt` exception:
