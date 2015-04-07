@@ -20,7 +20,9 @@ List of notes:
 * link:Common-Lisp.adoc[Common Lisp] -
   http://reference-error.org/guides/Common-Lisp.html[HTML version].
 
-* link:Python.adoc[Python].
+* link:Python.adoc[Python] -
+  http://reference-error.org/guides/Python.html[HTML version].
+
 
 == License
 
