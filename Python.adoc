@@ -265,6 +265,27 @@ print(a_module.__file__)
 python -m easy_install
 ----
 
+=== Using Python Anaconda distribution as a virtual environment
+
+Source: http://stackoverflow.com/questions/16727171/installing-anaconda-into-a-virtual-environment
+
+[source,sh,linenums]
+----
+# Download Python Anaconda from http://continuum.io/downloads
+cd /tmp/
+wget <anaconda-download-url>
+
+# Install Anaconda into a place
+bash Anaconda-*.sh -b -p <anaconda-destination>
+----
+
+Now whenever you want to use Python from Anaconda:
+
+[source,sh,linenums]
+----
+source <anaconda-destination>/bin/activate <anaconda-destination>
+----
+
 == FAQs
 
 === Why global interpreter lock (GIL) in CPython?
