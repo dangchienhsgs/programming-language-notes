@@ -258,6 +258,13 @@ import a_module
 print(a_module.__file__)
 ----
 
+=== Calling `easy_install` as module
+
+[source,sh,linenums]
+----
+python -m easy_install
+----
+
 == FAQs
 
 === Why global interpreter lock (GIL) in CPython?
