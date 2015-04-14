@@ -286,6 +286,19 @@ Now whenever you want to use Python from Anaconda:
 source <anaconda-destination>/bin/activate <anaconda-destination>
 ----
 
+=== One way to control relative import
+
+[source,python,linenums]
+----
+import sys
+import os
+sys.path.insert(0, os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "../..")
+))
+
+import fully.qualified.module.path
+----
+
 == FAQs
 
 === Why global interpreter lock (GIL) in CPython?
