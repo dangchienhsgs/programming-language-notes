@@ -310,6 +310,38 @@ sys.path.insert(0, os.path.abspath(
 import fully.qualified.module.path
 ----
 
+== Some Pip notes
+
+* To create a working environment requirement with `pip`:
++
+[source,sh,linenums]
+----
+pip freeze > stable-req.txt
+----
+
+* To install *editable* packages with `pip` (maybe from a `file:///` or SVN or Git, ...):
++
+[source,sh,linenums]
+----
+pip install -e URI
+----
+
+* To install requirements from requirement file:
++
+[source,sh,linenums]
+----
+pip install -r requirements.txt
+----
+
+* To install current directory as package:
++
+[source,sh,linenums]
+----
+pip install -e .
+----
+
+* `pip`'s `requirement.txt` format: http://www.pip-installer.org/en/1.1/requirements.html
+
 == FAQs
 
 === Why global interpreter lock (GIL) in CPython?
