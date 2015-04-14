@@ -237,6 +237,17 @@ import uuid
 print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
 ----
 
+=== Determining if a module exists
+
+[source,python,linenums]
+----
+try:
+    __import__("libcloud")
+    print("A module")
+except ImportError:
+    print("Not a module")
+----
+
 == FAQs
 
 === Why global interpreter lock (GIL) in CPython?
