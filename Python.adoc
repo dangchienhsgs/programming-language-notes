@@ -248,6 +248,16 @@ except ImportError:
     print("Not a module")
 ----
 
+=== Retrieving path for a module
+
+[source,python,linenums]
+----
+import a_module
+
+
+print(a_module.__file__)
+----
+
 == FAQs
 
 === Why global interpreter lock (GIL) in CPython?
