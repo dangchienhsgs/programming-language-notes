@@ -367,3 +367,11 @@ Reference: http://ipython.org/ipython-doc/stable/development/config.html
 `$HOME/.ipython/profile_default/startup/`
 
 Just put a Python file like `00-run-something.py`.
+
+=== Enum good practice
+
+[source,python,linenums]
+----
+class Materials:
+    Shaded, Shiny, Transparent, Matte = range(4)
+----
