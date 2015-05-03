@@ -519,6 +519,12 @@ Find +hunchentoot/acceptor.lisp+ and change +"errors/"+ to +"errors"+.
 (*a*) y                                        ;; ⇨ NIL
 (setf (symbol-function '*a*) #'(lambda () t))
 (*a*) y                                        ;; ⇨ T
+
+;;; Interestingly
+
+(defmacro *a* () '(list 1))
+
+(symbol-function '*a*)                         ;; ⇨ #<CLOSURE (LAMBDA (&REST SB-C::ARGS) :IN MACRO-FUNCTION) {1007F8018B}>
 ----
 
 
