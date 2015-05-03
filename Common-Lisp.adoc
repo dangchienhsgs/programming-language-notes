@@ -504,6 +504,24 @@ physical pathnames.
 
 Find +hunchentoot/acceptor.lisp+ and change +"errors/"+ to +"errors"+.
 
+=== The 2 namespaces: value cell and function cell
+
+[source,lisp,linenums]
+----
+(defparameter *a* :foo-bar)
+(defun *a* () nil)
+
+(symbol-value '*a*)                            ;; ⇨ :FOO-BAR
+(symbol-function '*a*)                         ;; ⇨ #<FUNCTION *A*>
+
+(setf (symbol-value '*a*) 10)
+*a* y                                          ;; ⇨ 10
+(*a*) y                                        ;; ⇨ NIL
+(setf (symbol-function '*a*) #'(lambda () t))
+(*a*) y                                        ;; ⇨ T
+----
+
+
 == Useful libraries
 
 * Pathnames and operating system interfaces: http://weitz.de/cl-fad[cl-pad],
