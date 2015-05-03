@@ -170,6 +170,17 @@ from distutils.sysconfig import get_python_lib
 print(get_python_lib())
 ----
 
+=== Generating a random base64 string
+
+```python
+import os
+import base64
+
+
+string_length = 32
+random_string = base64.urlsafe_b64encode(os.urandom(string_length))
+```
+
 === Generating SSH key pairs on file system
 
 Requirement: Pycrypto.
@@ -237,6 +248,100 @@ import uuid
 print(base64.b64encode(uuid.uuid4().bytes + uuid.uuid4().bytes))
 ----
 
+=== Determining if a module exists
+
+[source,python,linenums]
+----
+try:
+    __import__("libcloud")
+    print("A module")
+except ImportError:
+    print("Not a module")
+----
+
+=== Retrieving path for a module
+
+[source,python,linenums]
+----
+import a_module
+
+
+print(a_module.__file__)
+----
+
+=== Calling `easy_install` as module
+
+[source,sh,linenums]
+----
+python -m easy_install
+----
+
+=== Using Python Anaconda distribution as a virtual environment
+
+Source: http://stackoverflow.com/questions/16727171/installing-anaconda-into-a-virtual-environment
+
+[source,sh,linenums]
+----
+# Download Python Anaconda from http://continuum.io/downloads
+cd /tmp/
+wget <anaconda-download-url>
+
+# Install Anaconda into a place
+bash Anaconda-*.sh -b -p <anaconda-destination>
+----
+
+Now whenever you want to use Python from Anaconda:
+
+[source,sh,linenums]
+----
+source <anaconda-destination>/bin/activate <anaconda-destination>
+----
+
+=== One way to control relative import
+
+[source,python,linenums]
+----
+import sys
+import os
+sys.path.insert(0, os.path.abspath(
+    os.path.join(os.path.dirname(__file__), "../..")
+))
+
+import fully.qualified.module.path
+----
+
+== Some Pip notes
+
+* To create a working environment requirement with `pip`:
++
+[source,sh,linenums]
+----
+pip freeze > stable-req.txt
+----
+
+* To install *editable* packages with `pip` (maybe from a `file:///` or SVN or Git, ...):
++
+[source,sh,linenums]
+----
+pip install -e URI
+----
+
+* To install requirements from requirement file:
++
+[source,sh,linenums]
+----
+pip install -r requirements.txt
+----
+
+* To install current directory as package:
++
+[source,sh,linenums]
+----
+pip install -e .
+----
+
+* `pip`'s `requirement.txt` format: http://www.pip-installer.org/en/1.1/requirements.html
+
 == FAQs
 
 === Why global interpreter lock (GIL) in CPython?
@@ -294,3 +399,11 @@ Reference: http://ipython.org/ipython-doc/stable/development/config.html
 `$HOME/.ipython/profile_default/startup/`
 
 Just put a Python file like `00-run-something.py`.
+
+=== Enum good practice
+
+[source,python,linenums]
+----
+class Materials:
+    Shaded, Shiny, Transparent, Matte = range(4)
+----
