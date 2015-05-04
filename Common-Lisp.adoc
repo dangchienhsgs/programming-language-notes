@@ -527,6 +527,24 @@ Find +hunchentoot/acceptor.lisp+ and change +"errors/"+ to +"errors"+.
 (symbol-function '*a*)                         ;; ⇨ #<CLOSURE (LAMBDA (&REST SB-C::ARGS) :IN MACRO-FUNCTION) {1007F8018B}>
 ----
 
+=== `symbol-function` vs. `fdefinition`
+
+[source,lisp,linenums]
+----
+(defstruct person name age)
+
+(fdefinition 'person-name)             ;; ⇨ #<FUNCTION PERSON-NAME>
+(fdefinition '(setf person-name))      ;; ⇨ #<FUNCTION (SETF PERSON-NAME)>
+
+(symbol-function 'person-name)         ;; ⇨ #<FUNCTION PERSON-NAME>
+(symbol-function '(setf person-name))  ;; ⇨ Type error
+----
+
+According to Common Lisp HyperSpec:
+
+* `symbol-function` takes a *symbol*, while
+* `fdefinition` takes either a *symbol* or a `(setf symbol)` form that
+  designates a *function name*
 
 == Useful libraries
 
