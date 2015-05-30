@@ -546,6 +546,14 @@ According to Common Lisp HyperSpec:
 * `fdefinition` takes either a *symbol* or a `(setf symbol)` form that
   designates a *function name*
 
+== Retrieving current ASDF version
+
+[source,lisp,linenums]
+----
+(asdf:asdf-version)
+----
+
+
 == Useful libraries
 
 * Pathnames and operating system interfaces: http://weitz.de/cl-fad[cl-pad],
