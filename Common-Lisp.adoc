@@ -127,6 +127,9 @@ For SBCL: use `--noinform` argument when starting.
 
 [source,lisp,linenums]
 ----
+;; Require just ASDF 3+
+(uiop:getcwd)
+
 ;; Require cl-cwd
 (cl-cwd:get-cwd)
 
