@@ -553,6 +553,35 @@ According to Common Lisp HyperSpec:
 (asdf:asdf-version)
 ----
 
+== Running external program
+
+=== With ASDF's UIOP
+
+[source,lisp,linenums]
+----
+;; uiop:run-program returns `output', `error', `return-value'
+
+;; Just run it
+(uiop:run-program "ls")
+
+;; Output to `*standard-output*'
+(uiop:run-program "ls" :output t)
+
+;; Output as string
+(uiop:run-program "ls" :output :string)
+;; Extra ending newline stripped
+(uiop:run-program "ls" :output '(:string :stripped t))
+
+;; Feeding input
+(uiop:run-program "cat" :input (make-string-input-stream "hello world"))
+
+;; With shell
+(uiop:run-program "ls / | grep tmp" :output '(:string :stripped t) :force-shell t)
+----
+
+See https://common-lisp.net/project/asdf/asdf/Some-Utility-Functions.html[ASDF
+documentation] for more information.
+
 
 == Useful libraries
 
