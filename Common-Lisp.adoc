@@ -475,6 +475,15 @@ git clone <some-uri>
 
 Then just `(ql:quickload "project-name")` as usual.
 
+Another way is to push the directory containing `project-name.asd` into
+`asdf:*central-registry*` then load with Quicklisp:
+
+[source,lisp,linenums]
+----
+(push #p"/path/to/project/dir/" asdf:*central-registry*)
+(ql:quickload "<project-name>")
+----
+
 
 == FAQs
 
