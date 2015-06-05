@@ -463,6 +463,19 @@ With `cl-fad` library
 (ql:update-all-dists)
 ----
 
+=== Add a local project to Quicklisp
+
+Add your project to `~/quicklisp/local-projects/`
+
+[source,sh,linenums]
+----
+cd ~/quicklisp/local-projects/
+git clone <some-uri>
+----
+
+Then just `(ql:quickload "project-name")` as usual.
+
+
 == FAQs
 
 === What is truename?
