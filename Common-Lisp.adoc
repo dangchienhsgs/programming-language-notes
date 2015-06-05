@@ -606,6 +606,33 @@ According to Common Lisp HyperSpec:
 * `fdefinition` takes either a *symbol* or a `(setf symbol)` form that
   designates a *function name*
 
+=== `typecase` vs. `etypecase` vs. `ctypecase`
+
+Match type → perform action.
+
+* `typecase`: if no match → returns `nil`.
+* `ctypecase`: if no match → returns a _correctable error_.
+* `etypecase`: if no match → returns a _non-correctable error_.
+
+Examples:
+
+[source,lisp,linenums]
+----
+(typecase "a" (string :string))         ; ⇨ :string
+(typecase 1 (string :string))           ; ⇨ nil
+
+(let ((x 1))
+  (ctypecase x
+    (string :string)
+    (symbol (symbol-value x))))         ; ⇨ Asks to store value for X or abort
+
+(let ((x 1))
+  (etypecase x
+    (string :string)
+    (symbol (symbol-value x))))         ; ⇨ Error, cannot be corrected
+----
+
+
 == Useful libraries
 
 * Pathnames and operating system interfaces: http://weitz.de/cl-fad[cl-pad],
